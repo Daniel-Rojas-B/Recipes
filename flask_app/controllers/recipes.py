@@ -6,7 +6,7 @@ from flask_app.models import user, recipe
 from flask import flash
 
 
-@app.route('/recipe/add', methods=['POST'])         
+@app.route('/recipe/add', methods=['POST'])          
 def add_recipe():  
     if 'user_id' not in session: 
         return redirect('/logout')    
