@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+
+<body>
+    <div class="header_dash">
+        <h1>Welcome {{user.first_name}}</h1>
+        <a href="/recipes/new">+ Create</a>
+        <a href="/logout">logout</a>
+    </div>
+
+    <h5>All posted recipes:</h5>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Under 30 min</th>
+                <th>Posted By</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipe in all_recipes %}
+            
+            <tr>
+                <td>{{recipe.name}}</td>
+                <td>{{recipe.under_30_minutes}}</td>
+                <td>{{ recipe.creator.first_name}} {{ recipe.creator.last_name}}</td>
+                <td><a href="/recipe/view/{{recipe.id}}">view recipe </a>
+                    {%if user.first_name == recipe.creator.first_name %}
+                    |<a href="/recipe/edit/{{recipe.id}}"> edit </a>|
+                    <a href="/recipe/delete/{{recipe.id}}"> delete </a></td>
+                    {%endif%}
+            </tr>
+                
+                            
+
+            {%endfor%}
+        </tbody>
+
+    </table>
+
+
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+
+<body>
+    <div class="header">
+        <h1>Edit Recipe!</h1>
+        <a href="/recipes">back to recipes</a>
+        <a href="/logout">logout</a>
+    </div>
+
+    <br>
+    <form action="/recipe/update/{{recipe.id}}" method="POST">
+        {%- with messages = get_flashed_messages(category_filter=['new_recipe']) -%}
+        <h1></h1>
+        {%- if messages -%}
+        {%-for message in messages -%}
+        <p style="color: red">{{message}}</p>
+        {%- endfor -%}
+        {%- endif -%}
+        {%- endwith -%}
+        <div class="container">
+            <div class="left_column">
+                <div class="first">
+                    <input type="hidden" name="id" value="{{recipe.id}}">
+                    <input type="hidden" name="user_id" value="{{recipe.user_id}}">
+                    <label for="field1" class="text-black">Name:</label>
+                    <input type="text" name="name" class="form-control" value="{{recipe.name}}">
+                </div>
+                <br>
+                <div class="second">
+                    <label for="field2" class="text-black">Description:</label><textarea type="text" rows="10" cols="30"
+                        name="description" class="form-control">{{recipe.description}}</textarea>
+                </div>
+                <br>
+                <div class="third">
+                    <label for="field2" class="text-black">Instructions:</label><textarea type="text" rows="10"
+                        cols="30" name="instructions" class="form-control">{{recipe.instructions}}</textarea>
+                </div>
+            </div>
+            <div class="right_column">
+                <div class="mini_top">
+                    <label for="field2" class="text-black">Date Cooked/Made:</label>
+
+                    <input type="date" id="date" name="selectedDate" value="{{recipe.date_cooked_or_made}}" required>
+                </div>
+
+                <div id="mini_container">
+                    <label for="yes_no_radio">Under 30 minutes?</label>
+                    <div class="options">
+                        <p>
+                            <input type="radio" name="yes_no" value="yes" required>Yes</input>
+                        </p>
+                        <p>
+                            <input type="radio" name="yes_no" value="no" required>No</input>
+                        </p>
+                    </div>
+                </div>
+                <input type="submit" value="Submit" class="btn btn-success">
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
