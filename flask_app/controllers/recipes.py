@@ -8,7 +8,7 @@ from flask import flash
 
 @app.route('/recipe/add', methods=['POST'])         
 def add_recipe():  
-    if 'user_id' not in session:
+    if 'user_id' not in session: 
         return redirect('/logout')    
     
     if not Recipe.validate_recipe(request.form):
